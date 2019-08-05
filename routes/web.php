@@ -12,5 +12,10 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    //return $router->app->version();
+    return view('app');
+});
+
+$router->get('/key', function() {
+    return str_random(32);
 });
