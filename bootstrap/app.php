@@ -90,6 +90,9 @@ $app->singleton(
 | can respond to, as well as the controllers that may handle them.
 |
 */
+if (env('APP_DEBUG')) {
+    $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
+}
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
