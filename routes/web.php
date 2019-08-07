@@ -16,6 +16,10 @@ $router->get('/', function () use ($router) {
     return view('app');
 });
 
+$router->post('/domains', function() {
+    return 'hi';
+});
+
 $router->get('/key', function() {
     return str_random(32);
 });
