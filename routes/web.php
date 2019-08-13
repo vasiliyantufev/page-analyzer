@@ -14,12 +14,18 @@
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-$router->get('/', function () use ($router) {
+//$router->get('/', function () use ($router) {
+//    //return $router->app->version();
+//    return view('home');
+//});
+
+$router->get('/', function () {
     //return $router->app->version();
-    return view('app');
+    return view('home');
 });
 
 $router->post('/domains', function() {
+
     $domains = DB::table('domains')->get();
 
     $timestamps = Carbon::now();
