@@ -14,26 +14,26 @@
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-//$router->get('/', function () use ($router) {
-//    //return $router->app->version();
-//    return view('home');
-//});
 
 $router->get('/', function () {
     //return $router->app->version();
     return view('home');
 });
 
-$router->post('/domains', function() {
 
-    $domains = DB::table('domains')->get();
+$router->post('domains', 'DomainsController@create');
+$router->get('domains/{id}', 'DomainsController@show');
 
-    $timestamps = Carbon::now();
-    DB::table('domains')->insert(['name' => 'vasy', 'created_at' => $timestamps, 'updated_at' => $timestamps]);
-
-    dd($domains);
-//    return 'hi';
-});
+//$router->post('/domains', function() {
+//
+////    $domains = DB::table('domains')->get();
+////
+////    $timestamps = Carbon::now();
+////    DB::table('domains')->insert(['name' => 'vasy', 'created_at' => $timestamps, 'updated_at' => $timestamps]);
+//
+//    dd($domains);
+////    return 'hi';
+//});
 
 $router->get('/key', function() {
     return str_random(32);

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Domains;
+
 class DomainsController extends Controller
 {
     /**
@@ -14,5 +17,17 @@ class DomainsController extends Controller
         //
     }
 
-    //
+    public function create(Request $request)
+    {
+        $idDomain = Domains::createDomain($request->get('name'));
+        return redirect('domains/'.$idDomain);
+    }
+
+    public function show(int $domainId)
+    {
+        $domains = Domains::getDomain($domainId);
+        return view('info',[
+            'domain' => $domains
+        ]);
+    }
 }
