@@ -15,4 +15,11 @@ class DomainsTest extends TestCase
     {
         $this->get('domains/1')->assertResponseOk();
     }
+
+    public function testAddPost()
+    {
+        $param = ['name' => 'http://yandex.ru'];
+        $this->post('/domains', $param);
+        $this->seeInDatabase('domains', $param);
+    }
 }
