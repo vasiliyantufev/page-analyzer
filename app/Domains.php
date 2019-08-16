@@ -23,5 +23,12 @@ class Domains extends Model
         return $domain;
     }
 
+    public static function getAllDomains()
+    {
+        $domains = Domains::paginate(15);
+        return $domains;
+
+        //return view('user.index', ['users' => $users]);
+    }
 
 }

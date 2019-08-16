@@ -18,6 +18,7 @@ $router->get('/', function () {
 
 $router->post('domains', 'DomainsController@create');
 $router->get('domains/{id}', 'DomainsController@show');
+$router->get('domains', 'DomainsController@all');
 
 //$router->get('/key', function() {
 //    return str_random(32);

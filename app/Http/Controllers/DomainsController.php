@@ -25,9 +25,18 @@ class DomainsController extends Controller
 
     public function show(int $domainId)
     {
-        $domains = Domains::getDomain($domainId);
+        $domain = Domains::getDomain($domainId);
         return view('info',[
-            'domain' => $domains
+            'domain' => $domain
         ]);
+    }
+
+    public function all()
+    {
+        $domains = Domains::getAllDomains();
+        return view('list',[
+            'domains' => $domains
+        ]);
+//        dd($domains);
     }
 }
