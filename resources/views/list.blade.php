@@ -3,10 +3,12 @@
 @section('content')
     <hr class="my-12">
     <div class="container">
-        @foreach ($domains as $domain)
-            {{ $domain->name }}
-        @endforeach
+        <ul>
+            @foreach ($domains as $domain)
+                <li><a href="/domains/{{ $domain->id }}" >{{ $domain->name }}</a></li>
+            @endforeach
+        </ul>
+        {{ $domains->links() }}
     </div>
 
-    {{ $domains->links() }}
 @endsection
