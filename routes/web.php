@@ -20,6 +20,20 @@ $router->post('domains', 'DomainsController@create');
 $router->get('domains/{id}', 'DomainsController@show');
 $router->get('domains', 'DomainsController@all');
 
-//$router->get('/key', function() {
+//$router->get('/genKey', function() {
 //    return str_random(32);
 //});
+
+$router->get('/test', function() {
+    $client = new GuzzleHttp\Client();
+
+    $res = $client->request('GET', 'ya.ru', [
+        'auth' => ['user', 'pass']
+    ]);
+    //echo $res->getStatusCode();
+    // "200"
+    //echo $res->getHeader('content-type')[0];
+    // 'application/json; charset=utf8'
+    echo $res->getBody();
+    //return str_random(32);
+});
