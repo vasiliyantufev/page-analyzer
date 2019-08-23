@@ -9,7 +9,7 @@
             <hr class="my-4">
             <form action="domains" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="exampleInput" aria-describedby="help" placeholder="Enter name" name="name" required>
+                    <input type="url" class="form-control" id="exampleInput" aria-describedby="help" placeholder="Enter name" name="name" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

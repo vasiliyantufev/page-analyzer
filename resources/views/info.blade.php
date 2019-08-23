@@ -3,6 +3,7 @@
 @section('content')
     <hr class="my-12">
     <div class="container">
+
         <table class="table">
             <thead>
             <tr>
