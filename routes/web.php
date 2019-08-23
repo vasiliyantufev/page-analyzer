@@ -12,7 +12,6 @@
 */
 
 $router->get('/', function () {
-    //return $router->app->version();
     return view('home');
 });
 
@@ -24,16 +23,16 @@ $router->get('domains', 'DomainsController@all');
 //    return str_random(32);
 //});
 
-$router->get('/test', function() {
-    $client = new GuzzleHttp\Client();
-
-    $res = $client->request('GET', 'ya.ru', [
-        'auth' => ['user', 'pass']
-    ]);
-    //echo $res->getStatusCode();
-    // "200"
-    //echo $res->getHeader('content-type')[0];
-    // 'application/json; charset=utf8'
-    echo $res->getBody();
-    //return str_random(32);
-});
+//$router->get('/test', function() {
+//    //Client->request
+//
+////    $res = Client->request('GET', 'ya.ru', [
+////        'auth' => ['user', 'pass']
+////    ]);
+////    //echo $res->getStatusCode();
+////    // "200"
+////    //echo $res->getHeader('content-type')[0];
+////    // 'application/json; charset=utf8'
+////    echo $res->getBody();
+//    //return str_random(32);
+//});
