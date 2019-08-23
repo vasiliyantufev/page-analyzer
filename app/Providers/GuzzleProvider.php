@@ -24,16 +24,6 @@ class GuzzleProvider extends ServiceProvider
      */
     public function register()
     {
-//        $client = new GuzzleHttp\Client();
-//        $res = $client->request('GET', 'ya.ru', [
-//            'auth' => ['user', 'pass']
-//        ]);
-//        echo $res->getStatusCode();
-//        // "200"
-//        echo $res->getHeader('content-type')[0];
-//        // 'application/json; charset=utf8'
-//        echo $res->getBody();
-
         $this->app->bind('GuzzleHttp\Client', function(){
             return new Client();
         });

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
 
 class Domains extends Model
@@ -9,10 +10,17 @@ class Domains extends Model
     public $timestamps = true;
     protected $fillable = ['name'];
 
+
     public static function createDomain(string $name)
     {
+        $client = new Client();
+        $guzzleClient = $client->request('GET', $name);
+
         $domain = new self();
         $domain->name = $name;
+        $domain->status = $guzzleClient->getStatusCode();
+        $domain->header = $guzzleClient->getHeader('content-type')[0];
+        $domain->body = $guzzleClient->getBody();
         $domain->save();
         return $domain->id;
     }
