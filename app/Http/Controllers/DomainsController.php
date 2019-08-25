@@ -56,21 +56,4 @@ class DomainsController extends Controller
             'domains' => $domains
         ]);
     }
-
-//    public function test()
-//    {
-//        $document = new Document('https://www.drclinics.ru', true);
-//        $h1 = $document->first('h1::text');
-//        $title = $document->first('title::text');
-//        $keywords = $document->first('meta[name=keywords]::attr(content)');
-//        $descriptions = $document->first('meta[name=description]::attr(content)');
-//
-//        print_r($h1);
-//        echo '</br>';
-//        print_r($title);
-//        echo '</br>';
-//        print_r($keywords);
-//        echo '</br>';
-//        print_r($descriptions);
-//    }
 }
