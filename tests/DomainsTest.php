@@ -15,9 +15,16 @@ class DomainsTest extends TestCase
         $this->get('/')->assertResponseOk();
     }
 
-    public function testInfo()
+    public function testAll()
     {
-        $this->get('domains/1')->assertResponseOk();
+        $this->get('/domains')->assertResponseOk();
+    }
+
+    public function testDomainCreateAndView()
+    {
+        $domain = factory('App\Domain')->create();
+        $this->seeInDatabase('domains', $domain->getOriginal());
+        $this->get('domains/' . $domain->id)->assertResponseOk();
     }
 
     public function testForm()
@@ -25,12 +32,6 @@ class DomainsTest extends TestCase
         $param = ['name' => 'http://yandex.ru'];
         $this->post('/domains', $param);
         $this->seeInDatabase('domains', $param);
-    }
-
-    public function testDomainCreateAndView()
-    {
-        $domain = factory('App\Domain')->create();
-        $this->seeInDatabase('domains', $domain->getOriginal());
     }
 
     public function testGuzzle()
