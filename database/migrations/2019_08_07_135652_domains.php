@@ -20,6 +20,9 @@ class Domains extends Migration
             $table->string('status');
             $table->string('header');
             $table->text('body');
+            $table->string('h1');
+            $table->string('keywords');
+            $table->string('description');
             $table->timestamps();
         });
     }

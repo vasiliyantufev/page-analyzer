@@ -16,6 +16,9 @@ class Domain extends Model
         $domain->status = $params['status'];
         $domain->header = $params['header'];
         $domain->body = $params['body'];
+        $domain->h1 = $params['h1'];
+        $domain->keywords = $params['keywords'];
+        $domain->description = $params['description'];
         $domain->save();
         return $domain->id;
     }

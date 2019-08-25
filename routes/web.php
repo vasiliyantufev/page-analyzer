@@ -19,10 +19,9 @@ $router->post('domains', 'DomainsController@create');
 $router->get('domains/{id}', 'DomainsController@show');
 $router->get('domains', 'DomainsController@all');
 
+$router->get('test', 'DomainsController@test');
+
 //$router->get('/genKey', function() {
 //    return str_random(32);
 //});
 
-//$router->get('/test', function() {
-//
-//});
