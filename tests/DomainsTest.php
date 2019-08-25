@@ -1,7 +1,11 @@
 <?php
 
-use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 
 class DomainsTest extends TestCase
 {
@@ -16,10 +20,33 @@ class DomainsTest extends TestCase
         $this->get('domains/1')->assertResponseOk();
     }
 
-    public function testAddPost()
+    public function testForm()
     {
         $param = ['name' => 'http://yandex.ru'];
         $this->post('/domains', $param);
         $this->seeInDatabase('domains', $param);
+    }
+
+    public function testDomainCreateAndView()
+    {
+        $domain = factory('App\Domain')->create();
+        $this->seeInDatabase('domains', $domain->getOriginal());
+    }
+
+    public function testGuzzle()
+    {
+        $mock = new MockHandler([
+            new Response(200, ['X-Foo' => 'Bar']),
+            new Response(202, ['Content-Length' => 0]),
+            new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        // The first request is intercepted with the first response.
+        $this->assertEquals($client->request('GET', '/')->getStatusCode(), 200);
+        // The second request is intercepted with the second response.
+        $this->assertEquals($client->request('GET', '/')->getStatusCode(), 202);
     }
 }

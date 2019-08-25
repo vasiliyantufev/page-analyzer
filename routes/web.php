@@ -24,15 +24,5 @@ $router->get('domains', 'DomainsController@all');
 //});
 
 //$router->get('/test', function() {
-//    //Client->request
 //
-////    $res = Client->request('GET', 'ya.ru', [
-////        'auth' => ['user', 'pass']
-////    ]);
-////    //echo $res->getStatusCode();
-////    // "200"
-////    //echo $res->getHeader('content-type')[0];
-////    // 'application/json; charset=utf8'
-////    echo $res->getBody();
-//    //return str_random(32);
 //});

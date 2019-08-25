@@ -1,9 +1,12 @@
 <?php
 
-$factory->define(App\Domains::class, function (Faker\Generator $faker) {
+$factory->define(App\Domain::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'created_at' => '2010-00-00 00:00:00',
-        'updated_at' => '2010-00-00 00:00:00'
+        'status' => $faker->randomNumber(),
+        'header' => $faker->name,
+        'body' => $faker->text,
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime
     ];
 });
