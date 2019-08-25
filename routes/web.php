@@ -24,4 +24,3 @@ $router->get('test', 'DomainsController@test');
 //$router->get('/genKey', function() {
 //    return str_random(32);
 //});
-

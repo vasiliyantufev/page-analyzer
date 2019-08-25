@@ -34,5 +34,4 @@ class Domain extends Model
         $domains = Domain::paginate(15);
         return $domains;
     }
-
 }

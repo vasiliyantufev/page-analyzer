@@ -7,4 +7,4 @@ run:
 logs:
 	tail -f storage/logs/lumen.log
 lint:
-	composer run-script phpcs -- --standard=PSR2 public routes
+	composer run-script phpcs -- --standard=PSR2 public routes app
