@@ -31,7 +31,7 @@ class DomainsController extends Controller
         $params['body'] = $guzzleClient->getBody();
 
         //----------------------seo
-        $document = new Document($url, true);
+        $document = new Document($url);
         $document->has('h1::text') ? $params['h1'] = $document->first('h1::text') : $params['h1'] = '';
         $document->has('meta[name=keywords]::attr(content)') ?
             $params['keywords'] = $document->first('meta[name=keywords]::attr(content)') :

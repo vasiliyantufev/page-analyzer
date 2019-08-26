@@ -6,9 +6,17 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Response as Resp;
 
 class DomainsTest extends TestCase
 {
+    const PATH_FILES = 'tests' . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR;
+    const URL = 'http://domains.com';
+
+    private function getFilePath(string $filename = '')
+    {
+        return self::PATH_FILES . $filename;
+    }
 
     public function testHome()
     {
@@ -29,25 +37,25 @@ class DomainsTest extends TestCase
 
     public function testForm()
     {
-        $param = ['name' => 'http://yandex.ru'];
+        $param = ['name' => self::URL];
         $this->post('/domains', $param);
         $this->seeInDatabase('domains', $param);
     }
 
-    public function testGuzzle()
+    public function testMock()
     {
+        $content = file_get_contents(self::getFilePath('example.html'), true);
+
         $mock = new MockHandler([
-            new Response(200, ['X-Foo' => 'Bar']),
-            new Response(202, ['Content-Length' => 0]),
-            new RequestException("Error Communicating with Server", new Request('GET', 'test'))
+            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content),
+            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content)
         ]);
 
         $handler = HandlerStack::create($mock);
         $client = new Client(['handler' => $handler]);
+        $this->app->instance(Client::class, $client);
 
-        // The first request is intercepted with the first response.
-        $this->assertEquals($client->request('GET', '/')->getStatusCode(), 200);
-        // The second request is intercepted with the second response.
-        $this->assertEquals($client->request('GET', '/')->getStatusCode(), 202);
+        $this->assertEquals($client->request('POST', '/domains')->getBody(), $content);
+        $this->assertEquals($client->request('POST', '/domains')->getStatusCode(), Resp::HTTP_OK);
     }
 }
