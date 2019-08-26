@@ -42,20 +42,20 @@ class DomainsTest extends TestCase
         $this->seeInDatabase('domains', $param);
     }
 
-    public function testMock()
-    {
-        $content = file_get_contents(self::getFilePath('example.html'), true);
-
-        $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content),
-            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content)
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handler]);
-        $this->app->instance(Client::class, $client);
-
-        $this->assertEquals($client->request('POST', '/domains')->getBody(), $content);
-        $this->assertEquals($client->request('POST', '/domains')->getStatusCode(), Resp::HTTP_OK);
-    }
+//    public function testMock()
+//    {
+//        $content = file_get_contents(self::getFilePath('example.html'), true);
+//
+//        $mock = new MockHandler([
+//            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content),
+//            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content)
+//        ]);
+//
+//        $handler = HandlerStack::create($mock);
+//        $client = new Client(['handler' => $handler]);
+//        $this->app->instance(Client::class, $client);
+//
+//        $this->assertEquals($client->request('POST', '/domains')->getBody(), $content);
+//        $this->assertEquals($client->request('POST', '/domains')->getStatusCode(), Resp::HTTP_OK);
+//    }
 }
