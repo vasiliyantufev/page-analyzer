@@ -28,19 +28,19 @@ class DomainsTest extends TestCase
         $this->get('/domains')->assertResponseOk();
     }
 
-    public function testDomainCreateAndView()
-    {
-        $domain = factory('App\Domain')->create();
-        $this->seeInDatabase('domains', $domain->getOriginal());
-        $this->get('domains/' . $domain->id)->assertResponseOk();
-    }
-
-    public function testForm()
-    {
-        $param = ['name' => self::URL];
-        $this->post('/domains', $param);
-        $this->seeInDatabase('domains', $param);
-    }
+//    public function testDomainCreateAndView()
+//    {
+//        $domain = factory('App\Domain')->create();
+//        $this->seeInDatabase('domains', $domain->getOriginal());
+//        $this->get('domains/' . $domain->id)->assertResponseOk();
+//    }
+//
+//    public function testForm()
+//    {
+//        $param = ['name' => self::URL];
+//        $this->post('/domains', $param);
+//        $this->seeInDatabase('domains', $param);
+//    }
 
 //    public function testMock()
 //    {
