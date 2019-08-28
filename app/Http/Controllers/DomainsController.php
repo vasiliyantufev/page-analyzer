@@ -42,7 +42,7 @@ class DomainsController extends Controller
 
         $idDomain = Domain::createDomain($params);
 
-        return redirect('domains/'.$idDomain);
+        return redirect('domains/' . $idDomain);
     }
 
     public function show(int $domainId)
