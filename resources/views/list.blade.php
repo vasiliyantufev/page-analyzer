@@ -5,7 +5,7 @@
     <div class="container">
         <ul>
             @foreach ($domains as $domain)
-                <li><a href="/domains/{{ $domain->id }}" >{{ $domain->name }}</a></li>
+                <li><a href="{{route('domains.show', ['id' => $domain->id])}}" >{{ $domain->name }}</a></li>
             @endforeach
         </ul>
         {{ $domains->links() }}

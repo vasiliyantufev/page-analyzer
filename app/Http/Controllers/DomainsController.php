@@ -16,7 +16,7 @@ class DomainsController extends Controller
         $this->client = $client;
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|url'
@@ -53,7 +53,7 @@ class DomainsController extends Controller
         ]);
     }
 
-    public function all()
+    public function index()
     {
         $domains = Domain::getAllDomains();
         return view('list', [

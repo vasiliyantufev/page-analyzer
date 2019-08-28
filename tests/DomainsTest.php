@@ -1,10 +1,8 @@
 <?php
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Response as Resp;
 
@@ -18,27 +16,30 @@ class DomainsTest extends TestCase
         return self::PATH_FILES . $filename;
     }
 
-    public function testHome()
+    public function testIndex()
     {
-        $this->get('/')->assertResponseOk();
+        $this->get(route('index'))->assertResponseOk();
     }
 
-    public function testAll()
+    public function testDomainsIndex()
     {
-        $this->get('/domains')->assertResponseOk();
+        $this->get(route('domains.index'))->assertResponseOk();
     }
 
-    public function testDomainCreateAndView()
+    public function testDomainsShow()
     {
         $domain = factory('App\Domain')->create();
         $this->seeInDatabase('domains', $domain->getOriginal());
-        $this->get('domains/' . $domain->id)->assertResponseOk();
+
+        //echo route('domains.show', ['id' => $domain->id]) ;
+
+        $this->get(route('domains.show', ['id' => $domain->id]))->assertResponseOk();
     }
 
-    public function testForm()
+    public function testDomainsStore()
     {
         $param = ['name' => self::URL];
-        $this->post('/domains', $param);
+        $this->post(route('domains.store'), $param);
         $this->seeInDatabase('domains', $param);
     }
 
@@ -55,7 +56,7 @@ class DomainsTest extends TestCase
         $client = new Client(['handler' => $handler]);
         $this->app->instance(Client::class, $client);
 
-        $this->assertEquals($client->request('POST', '/domains')->getBody(), $content);
-        $this->assertEquals($client->request('POST', '/domains')->getStatusCode(), Resp::HTTP_OK);
+        $this->assertEquals($client->request('POST', route('domains.store'))->getBody(), $content);
+        $this->assertEquals($client->request('POST', route('domains.store'))->getStatusCode(), Resp::HTTP_OK);
     }
 }

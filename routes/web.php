@@ -11,13 +11,21 @@
 |
 */
 
-$router->get('/', function () {
+$router->get('/', ['as' => 'index', function () {
     return view('home');
-});
+}]);
 
-$router->post('domains', 'DomainsController@create');
-$router->get('domains/{id}', 'DomainsController@show');
-$router->get('domains', 'DomainsController@all');
+$router->get('domains', [
+    'as' => 'domains.index', 'uses' => 'DomainsController@index'
+]);
+
+$router->get('domains/{id}', [
+    'as' => 'domains.show', 'uses' => 'DomainsController@show'
+]);
+
+$router->post('domains', [
+    'as' => 'domains.store', 'uses' => 'DomainsController@store'
+]);
 
 //$router->get('/genKey', function() {
 //    return str_random(32);
