@@ -30,9 +30,6 @@ class DomainsTest extends TestCase
     {
         $domain = factory('App\Domain')->create();
         $this->seeInDatabase('domains', $domain->getOriginal());
-
-        //echo route('domains.show', ['id' => $domain->id]) ;
-
         $this->get(route('domains.show', ['id' => $domain->id]))->assertResponseOk();
     }
 
