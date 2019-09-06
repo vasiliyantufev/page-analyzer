@@ -8,6 +8,7 @@ use Illuminate\Http\Response as Resp;
 
 class DomainsControllerTest extends TestCase
 {
+
     const PATH_FILES = 'tests' . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR;
     const URL = 'http://domains.com';
 
