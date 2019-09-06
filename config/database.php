@@ -1,7 +1,5 @@
 <?php
 
-$herokuDb = parse_url(env('DATABASE_URL', ""));
-
 return [
 
 
