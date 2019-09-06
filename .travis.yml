@@ -5,5 +5,3 @@ install:
   - composer self-update
   - make install
 script: make lint test
-env:
-  - APP_NAME=page-analyzer APP_ENV=staging APP_DEBUG=false DB_CONNECTION=sqlite
