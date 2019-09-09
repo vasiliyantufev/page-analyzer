@@ -19,6 +19,7 @@ class Domains extends Migration
             $table->string('name');
             $table->string('status');
             $table->string('header');
+            $table->integer('content-length')->nullable();
             $table->text('body');
             $table->string('h1');
             $table->string('keywords');

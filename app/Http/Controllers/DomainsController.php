@@ -22,12 +22,20 @@ class DomainsController extends Controller
             'name' => 'required|url'
         ]);
 
+
         $url = $request->get('name');
 
         $guzzleClient = $this->client->request('GET', $url);
         $params['url'] = $url;
         $params['status'] = $guzzleClient->getStatusCode();
         $params['header'] = $guzzleClient->getHeader('content-type')[0];
+
+        $headers = $guzzleClient->getHeader('Content-Length');
+
+        //dd($headers);
+
+        $params['content-length'] = empty($headers) ? null : $headers[0];
+
         $params['body'] = $guzzleClient->getBody();
 
         //----------------------seo
@@ -44,6 +52,7 @@ class DomainsController extends Controller
             'name' => $params['url'],
             'status' => $params['status'],
             'header' => $params['header'],
+            'content-length' => $params['content-length'],
             'body' => $params['body'],
             'h1' => $params['h1'],
             'keywords' => $params['keywords'],

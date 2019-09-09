@@ -13,6 +13,7 @@ class DomainsControllerTest extends TestCase
 
     const PATH_FILES = 'tests' . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR;
     const URL = 'http://domains.com';
+    const CONTENT_LENGTH = 661;
 
     private function getFilePath(string $filename = '')
     {
@@ -43,7 +44,7 @@ class DomainsControllerTest extends TestCase
         $content = file_get_contents(self::getFilePath('example.html'), true);
 
         $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content)
+            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -58,7 +59,7 @@ class DomainsControllerTest extends TestCase
         $content = file_get_contents(self::getFilePath('example.html'), true);
 
         $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => 661], $content)
+            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
         ]);
 
         $handler = HandlerStack::create($mock);
@@ -66,5 +67,20 @@ class DomainsControllerTest extends TestCase
         $this->app->instance(Client::class, $client);
 
         $this->assertEquals($client->request('POST', route('domains.store'))->getStatusCode(), Resp::HTTP_OK);
+    }
+
+    public function testMockContentLength()
+    {
+        $content = file_get_contents(self::getFilePath('example.html'), true);
+
+        $mock = new MockHandler([
+            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+        $this->app->instance(Client::class, $client);
+
+        $this->assertEquals($client->request('POST', route('domains.store'))->getHeader('Content-Length')[0], self::CONTENT_LENGTH);
     }
 }
