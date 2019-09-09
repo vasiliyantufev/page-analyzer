@@ -5,9 +5,11 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Response as Resp;
+use Laravel\Lumen\Testing\DatabaseMigrations;
 
 class DomainsControllerTest extends TestCase
 {
+    use DatabaseMigrations;
 
     const PATH_FILES = 'tests' . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR;
     const URL = 'http://domains.com';
