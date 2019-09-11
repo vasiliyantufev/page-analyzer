@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <hr class="my-12">
-    <div class="container">
 
-        <table class="table">
+        <table class="table class="table table-striped"">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -28,5 +26,4 @@
             </tr>
             </tbody>
         </table>
-    </div>
 @endsection

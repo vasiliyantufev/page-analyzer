@@ -1,14 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-    <hr class="my-12">
-    <div class="container">
-        <ul>
-            @foreach ($domains as $domain)
-                <li><a href="{{route('domains.show', ['id' => $domain->id])}}" >{{ $domain->name }}</a></li>
-            @endforeach
-        </ul>
-        {{ $domains->links() }}
-    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">URL</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Updated at</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($domains as $domain)
+            <tr>
+                <td>{{ $domain['id'] }}</td>
+                <td><a href="{{route('domains.show', ['id' => $domain->id])}}" >{{ $domain['name'] }}</a></td>
+                <td>{{ $domain['created_at'] }}</td>
+                <td>{{ $domain['updated_at'] }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    {{ $domains->links() }}
 
 @endsection

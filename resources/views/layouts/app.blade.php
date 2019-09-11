@@ -7,7 +7,7 @@
 <body>
 
 @section('sidebar')
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 {{--        <a class="navbar-brand" href="">PA</a>--}}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
                     <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('domains.index')}}">All</a>
+                    <a class="nav-link" href="{{route('domains.index')}}">Domain List</a>
                 </li>
             </ul>
 
