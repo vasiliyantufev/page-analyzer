@@ -17,13 +17,13 @@ class Domains extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('status');
-            $table->string('header');
-            $table->integer('content-length')->nullable();
-            $table->text('body');
-            $table->string('h1');
-            $table->string('keywords');
-            $table->string('description');
+            $table->string('status')->nullable();
+            $table->string('header')->nullable();
+            $table->integer('content_length')->nullable();
+            $table->text('body')->nullable();
+            $table->string('h1')->nullable();
+            $table->string('keywords')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
+use App\Jobs\DomainJob;
 use Illuminate\Http\Request;
 use App\Domain;
-use DiDom\Document;
+use Illuminate\Support\Facades\Queue;
 
 class DomainsController extends Controller
 {
-    protected $client;
-
-    public function __construct(Client $client)
-    {
-        $this->client = $client;
-    }
 
     public function store(Request $request)
     {
@@ -22,44 +16,10 @@ class DomainsController extends Controller
             'name' => 'required|url'
         ]);
 
+        $domain = Domain::create(['name' => $request->get('name')]);
+        Queue::push(new DomainJob($domain));
 
-        $url = $request->get('name');
-
-        $guzzleClient = $this->client->request('GET', $url);
-        $params['url'] = $url;
-        $params['status'] = $guzzleClient->getStatusCode();
-        $params['header'] = $guzzleClient->getHeader('content-type')[0];
-
-        $headers = $guzzleClient->getHeader('Content-Length');
-
-        //dd($headers);
-
-        $params['content-length'] = empty($headers) ? null : $headers[0];
-
-        $params['body'] = $guzzleClient->getBody();
-
-        //----------------------seo
-        $document = new Document($url, true);
-        $document->has('h1::text') ? $params['h1'] = $document->first('h1::text') : $params['h1'] = '';
-        $document->has('meta[name=keywords]::attr(content)') ?
-            $params['keywords'] = $document->first('meta[name=keywords]::attr(content)') :
-            $params['keywords'] = 'no keywords';
-        $document->has('meta[name=description]::attr(content)') ?
-            $params['description'] = $document->first('meta[name=description]::attr(content)') :
-            $params['description'] = 'no description';
-
-        $domain = Domain::create([
-            'name' => $params['url'],
-            'status' => $params['status'],
-            'header' => $params['header'],
-            'content-length' => $params['content-length'],
-            'body' => $params['body'],
-            'h1' => $params['h1'],
-            'keywords' => $params['keywords'],
-            'description' => $params['description']
-        ]);
-
-        return redirect('domains/' . $domain->id);
+        return redirect(route('domains.show', ['id' => $domain->id]));
     }
 
     public function show(int $domainId)
