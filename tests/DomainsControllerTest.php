@@ -20,6 +20,19 @@ class DomainsControllerTest extends TestCase
         return self::PATH_FILES . $filename;
     }
 
+    protected function setUp():void
+    {
+        parent::setUp();
+        $content = file_get_contents(self::getFilePath('example.html'), true);
+        $mock = new MockHandler([
+            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
+        ]);
+        $handler = HandlerStack::create($mock);
+        $this->app->bind('GuzzleHttp\Client', function ($app) use ($handler) {
+            return new Client(['handler' => $handler]);
+        });
+    }
+
     public function testControllerIndex()
     {
         $this->get(route('domains.index'))->assertResponseOk();
@@ -36,50 +49,5 @@ class DomainsControllerTest extends TestCase
         $param = ['name' => self::URL];
         $this->post(route('domains.store'), $param);
         $this->seeInDatabase('domains', $param);
-    }
-
-    public function testMockBody()
-    {
-        $content = file_get_contents(self::getFilePath('example.html'), true);
-
-        $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handler]);
-        $this->app->instance(Client::class, $client);
-
-        $this->assertEquals($client->request('POST', route('domains.store'))->getBody(), $content);
-    }
-
-    public function testMockStatusCode()
-    {
-        $content = file_get_contents(self::getFilePath('example.html'), true);
-
-        $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handler]);
-        $this->app->instance(Client::class, $client);
-
-        $this->assertEquals($client->request('POST', route('domains.store'))->getStatusCode(), Resp::HTTP_OK);
-    }
-
-    public function testMockContentLength()
-    {
-        $content = file_get_contents(self::getFilePath('example.html'), true);
-
-        $mock = new MockHandler([
-            new Response(Resp::HTTP_OK, ['Content-Length' => self::CONTENT_LENGTH], $content)
-        ]);
-
-        $handler = HandlerStack::create($mock);
-        $client = new Client(['handler' => $handler]);
-        $this->app->instance(Client::class, $client);
-
-        $this->assertEquals($client->request('POST', route('domains.store'))->getHeader('Content-Length')[0], self::CONTENT_LENGTH);
     }
 }
