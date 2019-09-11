@@ -18,7 +18,7 @@ class DomainJob extends Job
     public function handle(Client $client)
     {
         $this->domain->pending();
-        try{
+        try {
             $guzzleClient = $client->request('GET', $this->domain->getOriginal('name'));
             //----------guzzle---------//
             $this->domain->status = $guzzleClient->getStatusCode();
@@ -37,8 +37,7 @@ class DomainJob extends Job
                 $this->domain->description = 'no description';
             $this->domain->save();
             $this->domain->completed();
-        }
-        catch (\Exception $error) {
+        } catch (\Exception $error) {
             $this->domain->failed();
             $this->domain->save();
         }
