@@ -16,6 +16,8 @@ class DomainsController extends Controller
         ]);
 
         $domain = Domain::create(['name' => $request->get('name')]);
+        $domain->initialize();
+
         Queue::push(new DomainJob($domain));
 
         return redirect(route('domains.show', ['id' => $domain->id]));
