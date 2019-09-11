@@ -33,7 +33,7 @@ class DomainsController extends Controller
 
     public function index()
     {
-        $domains = Domain::paginate(15);
+        $domains = Domain::paginate(10);
         return view('list', [
             'domains' => $domains
         ]);
