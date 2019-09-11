@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Queue;
 
 class DomainsController extends Controller
 {
-
     public function store(Request $request)
     {
         $this->validate($request, [
