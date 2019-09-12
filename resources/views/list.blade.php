@@ -9,6 +9,7 @@
             <th scope="col">URL</th>
             <th scope="col">Created at</th>
             <th scope="col">Updated at</th>
+            <th scope="col">State</th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                 <td><a href="{{route('domains.show', ['id' => $domain->id])}}" >{{ $domain['name'] }}</a></td>
                 <td>{{ $domain['created_at'] }}</td>
                 <td>{{ $domain['updated_at'] }}</td>
+                <td>{{ $domain['state'] }}</td>
             </tr>
         @endforeach
         </tbody>

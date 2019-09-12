@@ -35,10 +35,12 @@ class DomainJob extends Job
             $document->has('meta[name=description]::attr(content)') ?
                 $this->domain->description = $document->first('meta[name=description]::attr(content)') :
                 $this->domain->description = 'no description';
-            $this->domain->save();
             $this->domain->completed();
+            $this->domain->state = $this->domain->getState();
+            $this->domain->save();
         } catch (\Exception $error) {
             $this->domain->failed();
+            $this->domain->state = $this->domain->getState();
             $this->domain->save();
         }
     }

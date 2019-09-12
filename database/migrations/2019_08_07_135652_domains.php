@@ -17,6 +17,7 @@ class Domains extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('state')->nullable();
             $table->string('status')->nullable();
             $table->string('header')->nullable();
             $table->integer('content_length')->nullable();
