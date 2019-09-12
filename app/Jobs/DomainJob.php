@@ -23,12 +23,8 @@ class DomainJob extends Job
             //----------guzzle---------//
             $this->domain->status = $guzzleClient->getStatusCode();
             $this->domain->header = $guzzleClient->getHeader('content-type')[0];
-            $this->domain->content_length = ($guzzleClient->getHeader('Content-Length')) ?
-                implode('', $guzzleClient->getHeader('Content-Length')) :
-                strlen($guzzleClient->getBody());
+            $this->domain->content_length = strlen($guzzleClient->getBody());
             $this->domain->body = $guzzleClient->getBody();
-
-            //dd($headers);
             //----------DiDom----------//
             $document = new Document($this->domain->getOriginal('name'), true);
             $document->has('h1::text') ? $params['h1'] = $document->first('h1::text') : $params['h1'] = '';
