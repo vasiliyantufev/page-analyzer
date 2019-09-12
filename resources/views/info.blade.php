@@ -9,9 +9,9 @@
                 <th scope="col">Name</th>
                 <th scope="col">Status</th>
                 <th scope="col">Header</th>
-                <th scope="col">content-length</th>
-                <th scope="col">keywords</th>
-                <th scope="col">description</th>
+                <th scope="col">Content-length</th>
+                <th scope="col">Keywords</th>
+                <th scope="col">Description</th>
             </tr>
             </thead>
             <tbody>
@@ -20,7 +20,7 @@
                 <td>{{ $domain['name'] }}</td>
                 <td>{{ $domain['status'] }}</td>
                 <td>{{ $domain['header'] }}</td>
-                <td>{{ $domain['content-length'] }}</td>
+                <td>{{ $domain['content_length'] }}</td>
                 <td>{{ $domain['keywords'] }}</td>
                 <td>{{ $domain['description'] }}</td>
             </tr>
