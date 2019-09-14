@@ -6,12 +6,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Header</th>
-                <th scope="col">Content-length</th>
-                <th scope="col">Keywords</th>
-                <th scope="col">Description</th>
+                <th scope="col">URL</th>
+                <th scope="col">@lang('messages.status')</th>
+                <th scope="col">@lang('messages.header')</th>
+                <th scope="col">@lang('messages.length')</th>
+                <th scope="col">@lang('messages.keywords')</th>
+                <th scope="col">@lang('messages.description')</th>
             </tr>
             </thead>
             <tbody>

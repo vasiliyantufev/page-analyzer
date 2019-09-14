@@ -7,9 +7,9 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">URL</th>
-            <th scope="col">Created at</th>
-            <th scope="col">Updated at</th>
-            <th scope="col">State</th>
+            <th scope="col">@lang('messages.created')</th>
+            <th scope="col">@lang('messages.updated')</th>
+            <th scope="col">@lang('messages.state')</th>
         </tr>
         </thead>
         <tbody>

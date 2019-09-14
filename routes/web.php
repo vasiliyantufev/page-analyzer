@@ -11,7 +11,11 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
+
 $router->get('/', ['as' => 'index', function () {
+
+    //echo trans('messages.welcome');
     return view('home');
 }]);
 
