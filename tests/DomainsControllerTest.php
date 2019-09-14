@@ -33,18 +33,18 @@ class DomainsControllerTest extends TestCase
         });
     }
 
-    public function testControllerIndex()
+    public function testIndex()
     {
         $this->get(route('domains.index'))->assertResponseOk();
     }
 
-    public function testControllerShow()
+    public function testShow()
     {
         $domain = factory('App\Domain')->create();
         $this->get(route('domains.show', ['id' => $domain->id]))->assertResponseOk();
     }
 
-    public function testControllerStore()
+    public function testStore()
     {
         $param = ['name' => self::URL];
         $this->post(route('domains.store'), $param);

@@ -26,7 +26,7 @@ class DomainsController extends Controller
     public function show(int $domainId)
     {
         $domain = Domain::find($domainId);
-        return view('info', [
+        return view('domains.show', [
             'domain' => $domain
         ]);
     }
@@ -34,7 +34,7 @@ class DomainsController extends Controller
     public function index()
     {
         $domains = Domain::paginate(10);
-        return view('list', [
+        return view('domains.index', [
             'domains' => $domains
         ]);
     }

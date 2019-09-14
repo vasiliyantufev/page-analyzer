@@ -16,13 +16,13 @@
             </thead>
             <tbody>
             <tr>
-                <th scope="row">{{ $domain['id'] }}</th>
-                <td>{{ $domain['name'] }}</td>
-                <td>{{ $domain['status'] }}</td>
-                <td>{{ $domain['header'] }}</td>
-                <td>{{ $domain['content_length'] }}</td>
-                <td>{{ $domain['keywords'] }}</td>
-                <td>{{ $domain['description'] }}</td>
+                <th scope="row">{{ $domain->id }}</th>
+                <td>{{ $domain->name }}</td>
+                <td>{{ $domain->status }}</td>
+                <td>{{ $domain->header }}</td>
+                <td>{{ $domain->content_length }}</td>
+                <td>{{ $domain->keywords }}</td>
+                <td>{{ $domain->description }}</td>
             </tr>
             </tbody>
         </table>
