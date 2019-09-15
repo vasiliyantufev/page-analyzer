@@ -95,7 +95,7 @@ if (env('APP_DEBUG')) {
     $app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
 }
 
-$app->configure('states');
+$app->configure('machine_states');
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

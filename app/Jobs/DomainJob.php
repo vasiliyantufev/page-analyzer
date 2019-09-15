@@ -9,15 +9,17 @@ use DiDom\Document;
 class DomainJob extends Job
 {
     protected $domain;
+    protected $stateMachine;
 
-    public function __construct(Domain $domain)
+    public function __construct(Domain $domain, $stateMachine)
     {
         $this->domain = $domain;
+        $this->stateMachine = $stateMachine;
     }
 
     public function handle(Client $client)
     {
-        $this->domain->pending();
+        $this->stateMachine->apply('run');
         try {
             $guzzleClient = $client->request('GET', $this->domain->getOriginal('name'));
             //----------guzzle---------//
@@ -34,12 +36,12 @@ class DomainJob extends Job
             $document->has('meta[name=description]::attr(content)') ?
                 $this->domain->description = $document->first('meta[name=description]::attr(content)') :
                 $this->domain->description = 'no description';
-            $this->domain->completed();
-            $this->domain->state = $this->domain->getState();
+            $this->stateMachine->apply('success');
+            $this->domain->state = $this->stateMachine->getCurrentState()->getName();
             $this->domain->save();
         } catch (\Exception $error) {
-            $this->domain->failed();
-            $this->domain->state = $this->domain->getState();
+            $this->stateMachine->apply('failure');
+            $this->domain->state = $this->stateMachine->getCurrentState()->getName();
             $this->domain->save();
         }
     }
