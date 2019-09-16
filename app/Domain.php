@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Domain extends Model implements StatefulInterface
 {
-
     public $timestamps = true;
     private $stateMachine;
 
